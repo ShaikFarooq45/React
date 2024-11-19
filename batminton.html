@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="d1"></div>
+    <script type="text/babel">
+
+        var player1={
+            name:'Farooq',
+            score:0,
+            sets:0,
+            service:true
+        };
+        var player2={
+            name:'Sreenu',
+            score:0,
+            sets:0,
+            service:false
+
+        };
+
+        function addpoinFarooq(){
+          player1.score++;
+          player1.service=true;
+          player2.service=false;
+
+          if(player1.score>=21 && player1.score-player2.score==2){
+             player1.sets++;
+             player1.score=0;
+             player2.score=0
+          }
+
+          genUi();
+        }
+
+        function addpoinSreenu(){
+         player2.score++;
+         player1.service=false;
+         player2.service=true;
+
+        if(player2.score>=21 && player2.score-player1.score==2){
+           player2.sets++;
+           player2.score=0;
+           player1.score=0;
+        }
+         genUi();
+        }
+
+       function genUi(){
+        var ui = 
+                  <table border='2'>
+                      <tr>
+                        <td>{player1.name}
+                            {player1.service && <button >S</button>}</td>
+                        <td>{player1.score}</td>
+                        <td>{player1.sets}</td>
+                        <td><button onClick={()=>{addpoinFarooq()}}>Addpoint F</button></td>
+                     </tr>
+
+                      <tr>
+                        <td>{player2.name}
+                            {player2.service && <button>S</button>} </td>
+                        <td>{player2.score}</td>
+                        <td>{player2.sets}</td>
+                        <td><button onClick={()=>{addpoinSreenu()}}>Addpoint Sri</button> </td>
+                      </tr>
+            
+                  </table>
+          ReactDOM.render(ui,document.getElementById('d1'))
+       }
+
+       genUi();
+
+    </script>
+</body>
+</html>
